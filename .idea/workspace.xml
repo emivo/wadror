@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="255c931d-0c48-4689-933f-0eb3f0dd1a88" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/breweries_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/breweries_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/beers/index.html.erb" afterPath="$PROJECT_DIR$/app/views/beers/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/breweries/index.html.erb" afterPath="$PROJECT_DIR$/app/views/breweries/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/breweries/show.html.erb" afterPath="$PROJECT_DIR$/app/views/breweries/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/seeds.rb" afterPath="$PROJECT_DIR$/db/seeds.rb" />
-    </list>
+    <list default="true" id="255c931d-0c48-4689-933f-0eb3f0dd1a88" name="Default" comment="" />
     <ignored path="ratebeer.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.bundle/" />
