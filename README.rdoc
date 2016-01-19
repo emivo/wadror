@@ -1,4 +1,4 @@
 == README
 
 Web-palvelinohjelmointi kurssin tehtävä
-[Linkki Heroku-instassiin](https://enigmatic-forest-9635.herokuapp.com/breweries)
+{Linkki Heroku-instassiin}[https://enigmatic-forest-9635.herokuapp.com/breweries]
