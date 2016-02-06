@@ -42,7 +42,7 @@ class MembershipsController < ApplicationController
         @beer_club = BeerClub.find(@membership.beer_club_id)
         @beer_club.memberships << @membership
 
-        format.html { redirect_to @membership, notice: 'Membership was successfully created.' }
+        format.html { redirect_to @beer_club, notice: 'Membership was successfully created.' }
         format.json { render :show, status: :created, location: @membership }
       else
         @beer_clubs = BeerClub.all
@@ -57,7 +57,8 @@ class MembershipsController < ApplicationController
   def update
     respond_to do |format|
       if @membership.update(membership_params)
-        format.html { redirect_to @membership, notice: 'Membership was successfully updated.' }
+        @beer_club = BeerClub.find(@membership.beer_club_id)
+        format.html { redirect_to @beer_club, notice: 'Membership was successfully updated.' }
         format.json { render :show, status: :ok, location: @membership }
       else
         format.html { render :edit }
@@ -71,7 +72,7 @@ class MembershipsController < ApplicationController
   def destroy
     @membership.destroy
     respond_to do |format|
-      format.html { redirect_to memberships_url, notice: 'Membership was successfully destroyed.' }
+      format.html { redirect_to beer_clubs_url, notice: 'Membership was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
