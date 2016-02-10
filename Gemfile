@@ -7,6 +7,13 @@ gem 'rails', '4.2.5'
 group :development, :test do
   gem "better_errors"
   gem 'sqlite3'
+  gem 'rspec-rails', '~> 3.0'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 gem 'bcrypt', '~> 3.1.7'
