@@ -72,7 +72,7 @@ describe "Rating" do
     expect(page).not_to have_content "Karhu 10"
   end
 
-  it "when given, user has favorites" do
+  it "when given by user, user has favorites" do
     visit user_path(user)
 
     expect(page).to have_content "has not favorite beer"

@@ -3,6 +3,7 @@ require 'rails_helper'
 include Helpers
 
 describe "Beer" do
+  let!(:user) {FactoryGirl.create :user}
   let!(:brewery) { FactoryGirl.create :brewery, name: "Koff" }
 
   before :each do

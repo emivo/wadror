@@ -1,5 +1,4 @@
 language: ruby
-
 rvm:
 - 2.3.0
 script:
@@ -7,3 +6,8 @@ script:
 - RAILS_ENV=test bundle exec rake db:migrate --trace
 - bundle exec rake db:test:prepare
 - bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: W1YYsqrn7bNL2yvmZ15u3YLgujKmlZwfA+yIs81s3rF849uOOaaomwTNbTRBbaNhrYay5fA2gwWOzgLkPQVD76UrR1WdISUjZ+xCahT4nYD9pYYZAyMWnJMF4NJCxDaDJDGJguXvSKe8HqXy2+UgRgbH8xQVgoSveW1JIZH7PUkcrOvkNctNE8PvkoqyrrDPKLd2uh8VETCUnn5EmKEODUJogNZN/DFa4hsFsxxwSSCXehCm9VQ2F2lQ7StA2z6EMMBDxgZdL4agfMyULlD8Hl7aDVLGMG39E1Vb57SErX/veEgXyz7OG2l8gErWKx6I6D0qjSqJ0Nb8Xcitmj1rg6dnmL3R/bUOHDRaQuYrRWlxVpbo6q6fj2+rI/Oqc+Go48WOAjS4RvPwyb/jyvrAu58mUChc0f7VXOhWQcPZKJZNmjKLgjypAf5MvjTRVqbtR2e6O+H2RM4iVl9s1+wZgwcggdNMM1JSmAAB2+51H6T4pFR2DvEybTUApkC7jTsLMFgMgsDGogjOdfcjx/pL8Lc5c5nwD7qpq4B/+VaQS4tOSgHOpgj4X/kTCQkBbMBm4utWf/QxODSy2BPfrIiDSnBVfcShRyuaQ9VL0NiLncgDUuaY1fSvlpUuVCj/XNZ14Rx24GII2/vRXDjWkQt6jCpv0F/dPRAfNAwJCozFkKQ=
+    run: "rake db:migrate"

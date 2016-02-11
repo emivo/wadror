@@ -18,9 +18,10 @@
   <% if @beer.ratings.empty? %>
       Beer has not yet been rated!
   <% else %>
-      Has <%= pluralize( @beer.ratings.length , "rating") %>, average <%= @beer.average_rating %>
+      Has <%= pluralize(@beer.ratings.length, "rating") %>, average <%= @beer.average_rating %>
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_beer_path(@beer) %> |
-<%= link_to 'Back', beers_path %>
+<%= link_to('Edit', edit_beer_path(@beer)) if current_user %> |
+<%= link_to 'Back', beers_path %> |
+<%= link_to('Destroy the beer', @beer, method: :delete, data: {confirm: 'Are you sure?'}) if current_user %>
