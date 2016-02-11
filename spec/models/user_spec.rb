@@ -1,5 +1,8 @@
 require 'rails_helper'
 
+include Helpers
+
+
 RSpec.describe User, type: :model do
   it "has the username set correctly" do
     user = User.new username: "Pekka"
@@ -84,10 +87,10 @@ RSpec.describe User, type: :model do
     it "is the only rated" do
       beer = create_beer_with_rating(user, 10)
 
-      expect(user.favorite_style).to eq("lager")
+      expect(user.favorite_style).to eq(beer.style)
     end
 
-    it "is the one with highest sum of ratings if several rated" do
+    it "is the one with highest average of ratings if several rated" do
       create_beers_with_ratings(user, 10, 15, 7)
 
       beer = FactoryGirl.create(:beer, style: "ipa")
@@ -96,17 +99,34 @@ RSpec.describe User, type: :model do
       expect(user.favorite_style).to eq("ipa")
     end
   end
-end
 
-def create_beers_with_ratings(user, *scores)
-  scores.each do |score|
-    create_beer_with_rating user, score
+  describe "favorite brewery" do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it "has method for determining one" do
+      expect(user).to respond_to(:favorite_brewery)
+    end
+
+    it "without rating does not have favorite brewery" do
+      expect(user.favorite_brewery).to eq(nil)
+    end
+
+    it "is the only rated" do
+      beer = create_beer_with_rating(user, 20)
+      expect(user.favorite_brewery).to eq(beer.brewery)
+    end
+
+    it "is the one with highest average of ratings if several rated" do
+      create_beers_with_ratings(user, 10, 2, 5)
+
+      brewery = FactoryGirl.create(:brewery, name: "Koff")
+      beer = FactoryGirl.create(:beer, brewery: brewery)
+      FactoryGirl.create(:rating, score: 40, beer: beer, user: user)
+
+      expect(user.favorite_brewery).to eq(brewery)
+    end
   end
 end
 
-def create_beer_with_rating(user, score)
-  beer = FactoryGirl.create(:beer)
-  FactoryGirl.create(:rating, score: score, beer: beer, user: user)
-  beer
-end
+
 

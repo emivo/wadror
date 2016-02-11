@@ -24,6 +24,33 @@
   <% end %>
 </p>
 
+<h2> Favorites</h2>
+
+<ul>
+  <li>
+    <% if @user.favorite_beer.nil? %>
+        has not favorite beer yet!
+    <% else %>
+        favorite beer <%= @user.favorite_beer %>
+    <% end %>
+  </li>
+  <li>
+    <% if @user.favorite_style.nil? %>
+        has not favorite style yet!
+    <% else %>
+        favorite style <%= @user.favorite_style %>
+    <% end %>
+  </li>
+  <li>
+    <% if @user.favorite_brewery.nil? %>
+        has not favorite brewery yet!
+    <% else %>
+        favorite brewery <%= @user.favorite_brewery %>
+    <% end %>
+  </li>
+
+</ul>
+
 <h2> ratings </h2>
 <ul>
   <% @user.ratings.each do |rating| %>
