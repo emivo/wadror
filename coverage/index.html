@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-02-11T23:07:05+02:00">2016-02-11T23:07:05+02:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-02-11T23:33:05+02:00">2016-02-11T23:33:05+02:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -4603,7 +4603,7 @@
         <li class="covered" data-hits="14" data-linenumber="33">
           <span class="hits">14</span>
           
-          <code class="ruby">    query = ratings.joins(:beer).joins(&quot;INNER JOIN breweries&quot;).where(&quot;beers.brewery_id = breweries.id&quot;).group(&quot;breweries.id&quot;).average(:score)</code>
+          <code class="ruby">    query = ratings.joins(:beer =&gt; :brewery).group(&quot;breweries.id&quot;).average(:score)</code>
         </li>
       
         <li class="covered" data-hits="37" data-linenumber="34">
