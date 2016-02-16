@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/emivo/Työpöytä/ratebeer/app/models/rating.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/models/rating.rb": [
         1,
         1,
         1,
@@ -15,35 +15,35 @@
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/helpers/application_helper.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/helpers/beer_clubs_helper.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/helpers/beer_clubs_helper.rb": [
         1,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/helpers/beers_helper.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/helpers/beers_helper.rb": [
         1,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/helpers/breweries_helper.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/helpers/breweries_helper.rb": [
         1,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/helpers/memberships_helper.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/helpers/memberships_helper.rb": [
         1,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/helpers/sessions_helper.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/helpers/sessions_helper.rb": [
         1,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/helpers/users_helper.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/helpers/users_helper.rb": [
         1,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/models/beer.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/models/beer.rb": [
         1,
         1,
         1,
@@ -57,7 +57,7 @@
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/models/concerns/rating_average.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/models/concerns/rating_average.rb": [
         1,
         1,
         null,
@@ -66,7 +66,7 @@
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/models/brewery.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/models/brewery.rb": [
         1,
         1,
         1,
@@ -100,7 +100,7 @@
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/models/user.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/models/user.rb": [
         1,
         1,
         null,
@@ -139,7 +139,7 @@
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/controllers/sessions_controller.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/controllers/sessions_controller.rb": [
         1,
         1,
         null,
@@ -160,7 +160,7 @@
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/controllers/application_controller.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/controllers/application_controller.rb": [
         1,
         null,
         null,
@@ -168,7 +168,7 @@
         1,
         null,
         1,
-        119,
+        125,
         97,
         null,
         null,
@@ -177,7 +177,7 @@
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/controllers/users_controller.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/controllers/users_controller.rb": [
         1,
         1,
         null,
@@ -257,14 +257,14 @@
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/models/membership.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/models/membership.rb": [
         1,
         1,
         1,
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/models/beer_club.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/models/beer_club.rb": [
         1,
         1,
         1,
@@ -274,7 +274,7 @@
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/controllers/beers_controller.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/controllers/beers_controller.rb": [
         1,
         1,
         1,
@@ -357,7 +357,7 @@
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/controllers/breweries_controller.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/controllers/breweries_controller.rb": [
         1,
         1,
         1,
@@ -433,7 +433,61 @@
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/controllers/ratings_controller.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/lib/beermapping_api.rb": [
+        1,
+        1,
+        3,
+        6,
+        null,
+        null,
+        1,
+        null,
+        1,
+        3,
+        null,
+        3,
+        null,
+        3,
+        null,
+        2,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        3,
+        null,
+        null
+      ],
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/models/place.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        6,
+        null,
+        null
+      ],
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/controllers/places_controller.rb": [
+        1,
+        1,
+        null,
+        null,
+        1,
+        3,
+        3,
+        1,
+        null,
+        2,
+        null,
+        null,
+        null
+      ],
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/controllers/ratings_controller.rb": [
         1,
         1,
         1,
@@ -461,7 +515,7 @@
         null,
         null
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/controllers/beer_clubs_controller.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/controllers/beer_clubs_controller.rb": [
         0,
         0,
         0,
@@ -538,7 +592,7 @@
         0,
         0
       ],
-      "/home/emivo/Työpöytä/ratebeer/app/controllers/memberships_controller.rb": [
+      "/home/ad/fshome1/u1/a/airta/Linux/wadror/app/controllers/memberships_controller.rb": [
         0,
         0,
         0,
@@ -631,6 +685,6 @@
         0
       ]
     },
-    "timestamp": 1455226385
+    "timestamp": 1455620229
   }
 }
