@@ -12,6 +12,19 @@
       <li><%= link_to member.username, member %></li>
   <% end %>
 </ul>
-<%= link_to('Edit', edit_beer_club_path(@beer_club)) if current_user %>
-<p><%= link_to('Destroy the club', @beer_club, method: :delete, data: {confirm: 'Are you sure?'}) if current_user %></p>
+<% if current_user %>
+    <% if !@beer_club.members.include?(current_user) %>
+        <%= form_for(@membership) do |f| %>
+            <%= f.hidden_field :beer_club_id %>
+            <%= f.submit value: "join the club" %>
+        <% end %>
+    <% else %>
+        <%= form_for(Membership.find_by(user_id: current_user.id, beer_club_id: @beer_club.id), method: "delete") do |f| %>
+            <%= f.hidden_field :beer_club_id %>
+            <%= f.submit value: "end the membership" %>
+        <% end %>
+    <% end %>
+    <%= link_to('Edit', edit_beer_club_path(@beer_club)) %>
 
+    <%= link_to('Destroy the club', @beer_club, method: :delete, data: {confirm: 'Are you sure?'}) %>
+<% end %>
