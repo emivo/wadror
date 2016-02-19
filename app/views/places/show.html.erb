@@ -7,7 +7,7 @@
 </p>
 <p><%= @place.street %></p>
 <p><%= @place.zip %> <%= @place.city %> </p>
-<iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBArBJ5mprkJnjM1xuXpw3Ors0KgQa0964&q=<%= @place.street %>+<%= @place.city %>+<%= @place.country%>"
+<iframe src="https://www.google.com/maps/embed/v1/place?key=<%= @apikey %>&q=<%= @place.name %>+<%= @place.street %>+<%= @place.city %>+<%= @place.country%>"
   width="600"
   height="450"
   frameborder="0" style="border:0">

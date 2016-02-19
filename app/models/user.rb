@@ -25,7 +25,8 @@ class User < ActiveRecord::Base
 
   def favorite_style
     return nil if ratings.empty?
-    Hash[ratings.joins(:beer).group(:style).average(:score).sort].first[0]
+    query = ratings.joins(:beer).group(:style_id).average(:score)
+    Style.find Hash[query.sort_by {|id, value| value}.reverse].first[0]
   end
 
   def favorite_brewery

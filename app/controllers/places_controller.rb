@@ -1,5 +1,5 @@
 class PlacesController < ApplicationController
-
+  before_action :set_google_api_key
   def index
   end
 
@@ -20,5 +20,10 @@ class PlacesController < ApplicationController
     else
       render :index
     end
+  end
+
+  def set_google_api_key
+    @apikey = ENV['GAPIKEY']
+    # @apikey = "AIzaSyBArBJ5mprkJnjM1xuXpw3Ors0KgQa0964"
   end
 end

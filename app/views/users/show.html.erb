@@ -31,21 +31,21 @@
     <% if @user.favorite_beer.nil? %>
         has not favorite beer yet!
     <% else %>
-        favorite beer <%= @user.favorite_beer %>
+        favorite beer <%= link_to @user.favorite_beer.name, @user.favorite_beer %>, <%= link_to @user.favorite_beer.brewery.name, @user.favorite_beer.brewery %>
     <% end %>
   </li>
   <li>
     <% if @user.favorite_style.nil? %>
         has not favorite style yet!
     <% else %>
-        favorite style <%= @user.favorite_style %>
+        favorite style <%= link_to @user.favorite_style, @user.favorite_style %>
     <% end %>
   </li>
   <li>
     <% if @user.favorite_brewery.nil? %>
         has not favorite brewery yet!
     <% else %>
-        favorite brewery <%= @user.favorite_brewery %>
+        favorite brewery <%= link_to @user.favorite_brewery, @user.favorite_brewery %>
     <% end %>
   </li>
 

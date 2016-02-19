@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h2>
   <%= @brewery.name %>
-</p>
+</h2>
 
 <p>
   <strong>Established at </strong>
@@ -28,7 +27,9 @@
       Has <%= pluralize(@brewery.ratings.length, "rating") %>, average <%= @brewery.average_rating %>
   <% end %>
 </p>
-
-<%= link_to('Edit', edit_brewery_path(@brewery)) if current_user %>
-<p><%= link_to('Destroy the brewery', @brewery, method: :delete, data: {confirm: 'Are you sure?'}) if current_user %></p>
-
+<% if current_user %>
+    <p>
+      <%= link_to('Edit', edit_brewery_path(@brewery)) %>
+      <%= link_to('Destroy the brewery', @brewery, method: :delete, data: {confirm: 'Are you sure?'}) %>
+    </p>
+<% end %>

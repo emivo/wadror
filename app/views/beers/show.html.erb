@@ -29,6 +29,8 @@
         <%= f.submit %>
     <% end %>
 
-    <%= link_to 'Edit', edit_beer_path(@beer) %>
-
+    <p>
+      <%= link_to('Edit', edit_beer_path(@beer)) %>
+      <%= link_to('Destroy the beer', @beer, method: :delete, data: {confirm: 'Are you sure?'}) %>
+    </p>
 <% end %>
