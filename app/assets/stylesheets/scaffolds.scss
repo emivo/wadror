@@ -18,6 +18,12 @@ pre {
   font-size: 11px;
 }
 
+a.button {
+  &:visited {
+    color: #fff;
+  }
+}
+
 a {
   color: #000;
 

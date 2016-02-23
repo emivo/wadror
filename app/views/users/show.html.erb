@@ -1,7 +1,4 @@
-<p id="notice"><%= notice %></p>
-
 <h1>
-
   <%= @user.username %>
 </h1>
 
@@ -31,7 +28,8 @@
     <% if @user.favorite_beer.nil? %>
         has not favorite beer yet!
     <% else %>
-        favorite beer <%= link_to @user.favorite_beer.name, @user.favorite_beer %>, <%= link_to @user.favorite_beer.brewery.name, @user.favorite_beer.brewery %>
+        favorite beer <%= link_to @user.favorite_beer.name, @user.favorite_beer %>
+        , <%= link_to @user.favorite_beer.brewery.name, @user.favorite_beer.brewery %>
     <% end %>
   </li>
   <li>
@@ -63,7 +61,7 @@
   <% end %>
 </ul>
 <% if current_user == @user %>
-    <%= link_to 'Edit', edit_user_path(@user) %> |
-    <%= link_to 'Destroy', @user, method: :delete, data: {confirm: 'Are you sure?'} %> |
+    <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-default' %>
+    <%= link_to 'Destroy', @user, class: 'btn btn-danger', method: :delete, data: {confirm: 'Are you sure?'} %>
 <% end %>
-<%= link_to 'Back', users_path %>
+

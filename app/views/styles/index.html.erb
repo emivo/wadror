@@ -1,19 +1,14 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Styles</h1>
 
-<table>
-  <tbody>
-  <% @styles.each do |style| %>
-      <dl>
-        <dd><%= link_to style.name, style %></dd>
-        <dd><%= style.description %></dd>
-      </dl>
-  <% end %>
-  </tbody>
-</table>
+
+<% @styles.each do |style| %>
+    <dl>
+      <dd><%= link_to style.name, style %></dd>
+      <dd><%= style.description %></dd>
+    </dl>
+<% end %>
 
 <br>
 <% if current_user %>
-    <%= link_to 'New Style', new_style_path %>
+    <%= link_to 'New Style', new_style_path, class:'btn btn-primary' %>
 <% end %>

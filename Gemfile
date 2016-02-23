@@ -9,7 +9,10 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '~> 3.0'
 end
-
+gem 'bootstrap-sass'
+group :development do
+  gem 'rails_layout'
+end
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'

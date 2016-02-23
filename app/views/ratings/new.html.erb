@@ -12,9 +12,13 @@
           </ul>
         </div>
     <% end %>
-
-
-    <%= f.select :beer_id, options_from_collection_for_select(@beers, :id, :to_s, selected: @rating.beer_id) %>
-    score: <%= f.number_field :score %>
-    <%= f.submit %>
+<div class="form-group">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.select :beer_id, options_from_collection_for_select(@beers, :id, :to_s, selected: @rating.beer_id), {}, class: 'form-control' %>
+        score: <%= f.number_field :score, class:'form-control' %>
+      </div>
+    </div>
+</div>
+    <%= f.submit class: 'btn btn-primary' %>
 <% end %>

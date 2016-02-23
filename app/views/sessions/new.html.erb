@@ -1,8 +1,13 @@
-<p id="notice"><%= notice %></p>
 <h1>Sign in</h1>
 
 <%= form_tag session_path do %>
-    username <%= text_field_tag :username, params[:username] %>
-    password <%= password_field_tag :password, params[:passwords] %>
-    <%= submit_tag "Log in" %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-4">
+          username <%= text_field_tag :username, params[:username], class: 'form-control' %>
+          password <%= password_field_tag :password, params[:passwords], class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+    <%= submit_tag "Log in", class: 'btn btn-success' %>
 <% end %>

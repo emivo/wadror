@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, through: :memberships
 
+  def self.top(n)
+    User.all.sort_by { |u| -(u.ratings.count||0) }.take(n)
+  end
+
   def favorite_beer
     return nil if ratings.empty?
     ratings.order(score: :desc).limit(1).first.beer
@@ -26,13 +30,13 @@ class User < ActiveRecord::Base
   def favorite_style
     return nil if ratings.empty?
     query = ratings.joins(:beer).group(:style_id).average(:score)
-    Style.find Hash[query.sort_by {|id, value| value}.reverse].first[0]
+    Style.find Hash[query.sort_by { |id, value| value }.reverse].first[0]
   end
 
   def favorite_brewery
     return nil if ratings.empty?
     query = ratings.joins(:beer => :brewery).group("breweries.id").average(:score)
-    brewery_id = Hash[query.sort_by {|id,value| value}.reverse].first[0]
+    brewery_id = Hash[query.sort_by { |id, value| value }.reverse].first[0]
     Brewery.find(brewery_id)
   end
 end
