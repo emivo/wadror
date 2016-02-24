@@ -13,9 +13,6 @@
       </li>
   <% end %>
 </ul>
-<% if current_user %>
-    <p>
-      <%= link_to('Edit', edit_style_path(@style), class:'btn btn-default') %>
-      <%= link_to('Destroy the style', @style, class:'btn btn-danger', method: :delete, data: {confirm: 'Are you sure?'}) %>
-    </p>
-<% end %>
+<p>
+  <%= edit_and_destroy_buttons(@style) %>
+</p>

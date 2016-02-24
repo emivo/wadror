@@ -32,12 +32,11 @@ describe "Rating" do
     user.ratings << FactoryGirl.create(:rating, score: 20, beer: beer2)
 
     visit ratings_path
-
-    expect(page).to have_content "List of ratings"
+    expect(page).to have_content "Rating statistics"
     expect(page).to have_content "iso 3 20 Pekka"
     expect(page).to have_content "Karhu 10 Pekka"
     expect(page).to have_content "Karhu 20 Pekka"
-    expect(page).to have_content "Number of ratings: 3"
+    # expect(page).to have_content "Number of ratings: 3"
   end
 
   it "is shown in raters page, when there are ratings" do

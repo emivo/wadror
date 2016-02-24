@@ -13,6 +13,12 @@ Rails.application.routes.draw do
   resources :places, only:[:index, :show]
   post 'places', to: 'places#search'
   delete 'signout', to: 'sessions#destroy'
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+  resources :users do
+    post 'toggle_froze', on: :member
+  end
 
   resources :ratings, only: [:index, :new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.

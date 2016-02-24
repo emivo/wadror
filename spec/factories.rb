@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :user do
     username "Pekka"
+    active true
+    admin true
     password "Lorem1"
     password_confirmation "Lorem1"
   end
@@ -15,6 +17,7 @@ FactoryGirl.define do
 
   factory :brewery do
     name "anonymous"
+    active true
     year 1900
   end
 

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_froze]
+  before_action :ensure_that_user_is_admin, only: [:toggle_froze]
 
   # GET /users
   # GET /users.json
@@ -19,6 +20,17 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+
+  # POST
+  def toggle_froze
+    @user.update_attribute(:active, !@user.active)
+    if @user.active
+      message = 'Account reactivated'
+    else
+      message = 'Account frozen'
+    end
+    redirect_to users_path, notice: message
   end
 
   # POST /users
@@ -66,13 +78,13 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:username, :password, :password_confirmation)
+  end
 end
