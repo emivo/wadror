@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   resources :users do
     post 'toggle_froze', on: :member
   end
+  get 'beerlist', to:'beers#list'
+  get 'ngbeerlist', to:'beers#nglist'
+  get 'brewerylist', to:'breweries#list'
 
   resources :ratings, only: [:index, :new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.

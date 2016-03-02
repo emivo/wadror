@@ -1,12 +1,45 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :list]
   before_action :ensure_that_user_is_admin, only: [:destroy]
+
+
+  def list
+  end
   # GET /breweries
   # GET /breweries.json
   def index
+    @breweries = Brewery.all
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
+
+    order = params[:order] || 'name'
+    desc = order == session[:previous_order]
+    if desc
+      session[:previous_order] = nil
+    else
+      session[:previous_order] = order
+    end
+
+    @active_breweries = select_order(order, desc, @active_breweries)
+    @retired_breweries = select_order(order, desc, @retired_breweries)
+  end
+
+  def select_order(order, desc, object)
+    case order
+      when 'name' then
+        if desc
+          object.sort_by { |b| b.name }.reverse
+        else
+          object.sort_by { |b| b.name }
+        end
+      when 'year' then
+        if desc
+          object.sort_by { |b| b.year }.reverse
+        else
+          object.sort_by { |b| b.year }
+        end
+    end
   end
 
   # GET /breweries/1
@@ -30,7 +63,7 @@ class BreweriesController < ApplicationController
 
     new_status = brewery.active? ? "active" : "retired"
 
-    redirect_to :back, notice:"brewery activity status changed to #{new_status}"
+    redirect_to :back, notice: "brewery activity status changed to #{new_status}"
   end
 
   # POST /breweries

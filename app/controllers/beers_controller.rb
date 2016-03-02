@@ -1,7 +1,7 @@
 class BeersController < ApplicationController
   before_action :set_beer, only: [:show, :edit, :update, :destroy]
   before_action :set_breweries_and_styles_for_template, only: [:new, :edit, :create]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :list, :nglist]
   before_action :ensure_that_user_is_admin, only: [:destroy]
 
   def set_breweries_and_styles_for_template
@@ -9,10 +9,45 @@ class BeersController < ApplicationController
     @styles = Style.all
   end
 
+  def list
+  end
+
+  def nglist
+  end
+
   # GET /beers
   # GET /beers.json
   def index
     @beers = Beer.all
+
+    order = params[:order] || 'name'
+    desc = order == session[:previous_order]
+    if desc
+      session[:previous_order] = nil
+    else
+      session[:previous_order] = order
+    end
+
+    @beers = case order
+               when 'name' then
+                 if desc
+                   @beers.sort_by { |b| b.name }.reverse
+                 else
+                   @beers.sort_by { |b| b.name }
+                 end
+               when 'brewery' then
+                 if desc
+                   @beers.sort_by { |b| b.brewery.name }.reverse
+                 else
+                   @beers.sort_by { |b| b.brewery.name }
+                 end
+               when 'style' then
+                 if desc
+                   @beers.sort_by { |b| b.style.name }.reverse
+                 else
+                   @beers.sort_by { |b| b.style.name }
+                 end
+             end
   end
 
   # GET /beers/1
