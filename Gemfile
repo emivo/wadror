@@ -31,6 +31,7 @@ end
 gem 'jquery-turbolinks'
 gem 'selenium-webdriver'
 gem 'database_cleaner'
+gem 'rack-mini-profiler'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

@@ -1,7 +1,7 @@
 <h1>
   <%= @user.username %>
   <% unless @user.active %>
-  <span class="label label-info">account frozen</span>
+      <span class="label label-info">account frozen</span>
   <% end %>
 </h1>
 
@@ -18,10 +18,26 @@
       not member in any beer club
   <% else %>
       member of
-      <% @user.beer_clubs.each do |club| %>
-          <%= link_to club.name, club %>
+    <ul>
+      <% @user.memberships.each do |membership| %>
+          <% if membership.confirmed %>
+              <li>
+                <%= link_to membership.beer_club.name, membership.beer_club %>
+              </li>
+          <% end %>
       <% end %>
-  <% end %>
+    </ul>
+    applied membership of
+    <ul>
+      <% @user.memberships.each do |membership| %>
+          <% unless membership.confirmed %>
+              <li>
+                <%= link_to membership.beer_club.name, membership.beer_club %>
+              </li>
+          <% end %>
+      <% end %>
+    </ul>
+<% end %>
 </p>
 
 <h2> Favorites</h2>
@@ -67,10 +83,10 @@
 <% if @user == current_user %>
     <%= edit_and_destroy_buttons(@user) %>
 <% end %>
-<% if current_user and current_user.admin and !@user.admin  %>
+<% if current_user and current_user.admin and !@user.admin %>
     <% if @user.active %>
-    <%= link_to 'froze account', url_for([:toggle_froze , @user]), method: :post, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
+        <%= link_to 'froze account', url_for([:toggle_froze, @user]), method: :post, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
     <% else %>
-        <%= link_to 'reactivate account', url_for([:toggle_froze , @user]), method: :post, class: 'btn btn-danger' %>
-        <% end %>
+        <%= link_to 'reactivate account', url_for([:toggle_froze, @user]), method: :post, class: 'btn btn-danger' %>
+    <% end %>
 <% end %>

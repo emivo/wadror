@@ -7,10 +7,13 @@ Rails.application.routes.draw do
   resources :breweries
   resource :session, only: [:new, :create, :destroy]
   root 'breweries#index'
+  resources :memberships do
+    post 'confirm', on: :member
+  end
   get 'kaikki_bisset', to: 'beers#index'
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
-  resources :places, only:[:index, :show]
+  resources :places, only: [:index, :show]
   post 'places', to: 'places#search'
   delete 'signout', to: 'sessions#destroy'
   resources :breweries do
@@ -19,9 +22,9 @@ Rails.application.routes.draw do
   resources :users do
     post 'toggle_froze', on: :member
   end
-  get 'beerlist', to:'beers#list'
-  get 'ngbeerlist', to:'beers#nglist'
-  get 'brewerylist', to:'breweries#list'
+  get 'beerlist', to: 'beers#list'
+  get 'ngbeerlist', to: 'beers#nglist'
+  get 'brewerylist', to: 'breweries#list'
 
   resources :ratings, only: [:index, :new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.

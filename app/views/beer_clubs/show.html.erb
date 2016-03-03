@@ -6,25 +6,39 @@
 
 <h2>Members</h2>
 <ul>
-  <% @beer_club.members.each do |member| %>
-      <li><%= link_to member.username, member %></li>
+  <% @beer_club.memberships.each do |membership| %>
+      <% if membership.confirmed %>
+          <li><%= link_to membership.user.username, membership.user %></li>
+      <% end %>
   <% end %>
 </ul>
+<h2>Outstanding applications</h2>
+<% @beer_club.memberships.each do |membership| %>
+    <% unless membership.confirmed %>
+        <li>
+          <%= link_to membership.user.username, membership.user %>
+          <% if @existing_membership.confirmed %>
+              <%= link_to('Confirm', confirm_membership_path(membership.id), method: :post, class: "btn btn-primary") %>
+          <% end %>
+        </li>
+    <% end %>
+<% end %>
 <% if current_user %>
     <p>
-      <% if !@beer_club.members.include?(current_user) %>
+      <% if !@existing_membership %>
           <%= form_for(@membership) do |f| %>
               <%= f.hidden_field :beer_club_id %>
               <%= f.submit class: 'btn btn-primary', value: "join the club" %>
           <% end %>
-      <% else %>
-          <%= form_for(Membership.find_by(user_id: current_user.id, beer_club_id: @beer_club.id), method: "delete") do |f| %>
-              <%= f.hidden_field :beer_club_id %>
+      <% elsif @existing_membership.confirmed %>
+          <%= form_for(@existing_membership, method: "delete") do |f| %>
               <%= f.submit value: "end the membership", class: 'btn btn-danger btn-sm' %>
           <% end %>
       <% end %>
     </p>
     <p>
-      <%= edit_and_destroy_buttons(@beer_club) %>
+      <% if @existing_membership.confirmed %>
+          <%= edit_and_destroy_buttons(@beer_club) %>
+      <% end %>
     </p>
 <% end %>

@@ -1,5 +1,6 @@
 class BeerClubsController < ApplicationController
   before_action :set_beer_club, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_that_member, only: [:edit, :update]
   before_action :ensure_that_signed_in, except: [:index, :show]
   before_action :ensure_that_user_is_admin, only: [:destroy]
   # GET /beer_clubs
@@ -11,8 +12,10 @@ class BeerClubsController < ApplicationController
   # GET /beer_clubs/1
   # GET /beer_clubs/1.json
   def show
-      @membership = Membership.new
-      @membership.beer_club = @beer_club
+    @membership = Membership.new
+    @membership.beer_club = @beer_club
+    @existing_membership = Membership.find_by(user: current_user, beer_club: @beer_club)
+
   end
 
   # GET /beer_clubs/new
@@ -28,9 +31,11 @@ class BeerClubsController < ApplicationController
   # POST /beer_clubs.json
   def create
     @beer_club = BeerClub.new(beer_club_params)
+    membership = Membership.new(beer_club: @beer_club, user: current_user, confirmed: true)
 
     respond_to do |format|
       if @beer_club.save
+        membership.save
         format.html { redirect_to @beer_club, notice: 'Beer club was successfully created.' }
         format.json { render :show, status: :created, location: @beer_club }
       else
@@ -65,13 +70,20 @@ class BeerClubsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_beer_club
-      @beer_club = BeerClub.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_beer_club
+    @beer_club = BeerClub.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def beer_club_params
-      params.require(:beer_club).permit(:name, :founded, :city)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def beer_club_params
+    params.require(:beer_club).permit(:name, :founded, :city)
+  end
+
+  def ensure_that_member
+    membership = Membership.find(user: current_user, beer_club: @beer_club)
+    if membership.nil? or !membership.confirmed
+      redirect_to :back, notice: 'only club members can do that'
     end
+  end
 end

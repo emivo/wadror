@@ -1,11 +1,20 @@
 class MembershipsController < ApplicationController
-  before_action :set_membership, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_membership, only: [:show, :confirm, :edit, :update, :destroy]
+  before_action :ensure_that_user_is_member, only: [:confirm]
   # GET /memberships
   # GET /memberships.json
   def index
     @memberships = Membership.all
   end
+
+  # POST /membership/:id/confirm
+  def confirm
+    ensure_that_user_is_member
+    @membership.confirmed = true
+    @membership.save
+    redirect_to @membership.beer_club, notice: @membership.user.username + ' added to the club!'
+  end
+
 
   # GET /memberships/1
   # GET /memberships/1.json
@@ -26,13 +35,11 @@ class MembershipsController < ApplicationController
   # POST /memberships.json
   def create
     @users_memberships = Membership.where(user_id: current_user.id)
-
     @membership = Membership.new(membership_params)
-
+    @membership.confirmed = false;
     @already_member = @users_memberships.find_by(beer_club_id: @membership.beer_club_id)
 
-
-    if !@already_member.nil?
+    unless @already_member.nil?
       @membership.errors.set(:user_id, ["cannot be in same club twice"])
     end
     respond_to do |format|
@@ -42,7 +49,7 @@ class MembershipsController < ApplicationController
         @beer_club = BeerClub.find(@membership.beer_club_id)
         @beer_club.memberships << @membership
 
-        format.html { redirect_to @beer_club, notice: current_user.username + ', welcome to the club!' }
+        format.html { redirect_to @beer_club, notice: 'Your join request is sent to the club!' }
         format.json { render :show, status: :created, location: @membership }
       else
         @beer_clubs = BeerClub.all
@@ -87,5 +94,12 @@ class MembershipsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def membership_params
     params.require(:membership).permit(:beer_club_id)
+  end
+
+  def ensure_that_user_is_member
+    current_users_membership = Membership.find_by(user: current_user, beer_club: @membership.beer_club)
+    if current_users_membership.nil? or !current_users_membership.confirmed
+      redirect_to :back, notice: 'only members of club can do that'
+    end
   end
 end
