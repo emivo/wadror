@@ -3,6 +3,13 @@ class BeersController < ApplicationController
   before_action :set_breweries_and_styles_for_template, only: [:new, :edit, :create]
   before_action :ensure_that_signed_in, except: [:index, :show, :list, :nglist]
   before_action :ensure_that_user_is_admin, only: [:destroy]
+  before_action :expire_fragment_beer_lists, only: [:create, :update, :destroy]
+  before_action :skip_if_cached, only:[:index]
+
+  def skip_if_cached
+    @order = params[:order] || 'name'
+    return render :index if fragment_exist?( 'beerlist-#{@order}' )
+  end
 
   def set_breweries_and_styles_for_template
     @breweries = Brewery.all
@@ -18,36 +25,34 @@ class BeersController < ApplicationController
   # GET /beers
   # GET /beers.json
   def index
-    @beers = Beer.includes(:brewery, :style).all
+      @beers = Beer.includes(:brewery, :style).all
+      desc = @order == session[:previous_order]
+      if desc
+        session[:previous_order] = nil
+      else
+        session[:previous_order] = @order
+      end
 
-    order = params[:order] || 'name'
-    desc = order == session[:previous_order]
-    if desc
-      session[:previous_order] = nil
-    else
-      session[:previous_order] = order
-    end
-
-    @beers = case order
-               when 'name' then
-                 if desc
-                   @beers.sort_by { |b| b.name }.reverse
-                 else
-                   @beers.sort_by { |b| b.name }
-                 end
-               when 'brewery' then
-                 if desc
-                   @beers.sort_by { |b| b.brewery.name }.reverse
-                 else
-                   @beers.sort_by { |b| b.brewery.name }
-                 end
-               when 'style' then
-                 if desc
-                   @beers.sort_by { |b| b.style.name }.reverse
-                 else
-                   @beers.sort_by { |b| b.style.name }
-                 end
-             end
+      @beers = case @order
+                 when 'name' then
+                   if desc
+                     @beers.sort_by { |b| b.name }.reverse
+                   else
+                     @beers.sort_by { |b| b.name }
+                   end
+                 when 'brewery' then
+                   if desc
+                     @beers.sort_by { |b| b.brewery.name }.reverse
+                   else
+                     @beers.sort_by { |b| b.brewery.name }
+                   end
+                 when 'style' then
+                   if desc
+                     @beers.sort_by { |b| b.style.name }.reverse
+                   else
+                     @beers.sort_by { |b| b.style.name }
+                   end
+               end
   end
 
   # GET /beers/1
@@ -115,5 +120,9 @@ class BeersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def beer_params
     params.require(:beer).permit(:name, :style_id, :brewery_id)
+  end
+
+  def expire_fragment_beer_lists
+    ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
   end
 end
