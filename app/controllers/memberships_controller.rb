@@ -36,7 +36,7 @@ class MembershipsController < ApplicationController
   def create
     @users_memberships = Membership.where(user_id: current_user.id)
     @membership = Membership.new(membership_params)
-    @membership.confirmed = false;
+    @membership.confirmed = false
     @already_member = @users_memberships.find_by(beer_club_id: @membership.beer_club_id)
 
     unless @already_member.nil?
