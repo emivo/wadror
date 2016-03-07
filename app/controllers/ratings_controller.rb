@@ -2,7 +2,7 @@ class RatingsController < ApplicationController
   def index
     # SQL-kyselyiden määrä pudotettu n. 1100 => n. 40
     # sitten vielä cachaus, tuskin auttaa paljoakaan verrattuna SQL parannukseen
-    @ratings = Rails.cache.fetch('ratings', expires_in: 3.minutes) { Rating.all }
+    # @ratings = Rails.cache.fetch('ratings', expires_in: 3.minutes) { Rating.all }
     @recent = Rails.cache.fetch('recent', expires_in: 3.minutes) { Rating.recent }
     @top_raters = Rails.cache.fetch('top_raters', expires_in: 3.minutes) { User.top 3 }
     @top_breweries = Rails.cache.fetch('top_breweries', expires_in: 3.minutes) { Brewery.top 3 }
