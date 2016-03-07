@@ -37,7 +37,7 @@
       <% end %>
     </p>
     <p>
-      <% if @existing_membership.confirmed %>
+      <% if @existing_membership && @existing_membership.confirmed %>
           <%= edit_and_destroy_buttons(@beer_club) %>
       <% end %>
     </p>
