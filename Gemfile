@@ -21,6 +21,7 @@ group :test do
   gem 'simplecov', require: false
 end
 gem 'httparty'
+gem 'omniauth-github'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 

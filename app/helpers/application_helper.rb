@@ -1,7 +1,13 @@
 module ApplicationHelper
   def edit_and_destroy_buttons(item)
     unless current_user.nil?
-      edit = link_to('Edit', url_for([:edit, item]), class: "btn btn-primary")
+      if item.is_a? User
+        unless item.password_digest.nil?
+          edit = link_to('Edit', url_for([:edit, item]), class: "btn btn-primary")
+        end
+      else
+        edit = link_to('Edit', url_for([:edit, item]), class: "btn btn-primary")
+      end
       if item.is_a? Brewery or item.is_a? Beer or item.is_a? BeerClub or item.is_a? Style
         if current_user.admin
           edit_and_destroy(edit, item)

@@ -12,7 +12,7 @@ class Brewery < ActiveRecord::Base
   scope :retired, -> { where active:[nil, false] }
 
   def self.top(n)
-    Brewery.all.sort_by{ |b| -(b.average_rating||0)}.take(n)
+    Brewery.find(Rating.joins(:beer => :brewery).order('average_score DESC').limit(n).group(:brewery_id).average(:score).keys).sort_by{ |b| -(b.average_rating||0)}
   end
 
   def year_cannot_be_in_the_future

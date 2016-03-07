@@ -9,7 +9,7 @@ class Beer < ActiveRecord::Base
   validates :style_id, presence: true
 
   def self.top(n)
-    Beer.all.sort_by { |b| -(b.average_rating||0) }.take(n)
+    Beer.find(Rating.order('average_score DESC').limit(n).group(:beer_id).average(:score).keys).sort_by{ |b| -(b.average_rating||0)}
   end
 
   def to_s

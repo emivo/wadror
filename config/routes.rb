@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'beerlist', to: 'beers#list'
   get 'ngbeerlist', to: 'beers#nglist'
   get 'brewerylist', to: 'breweries#list'
+  get 'auth/:provider/callback', to: 'sessions#create_oauth'
 
   resources :ratings, only: [:index, :new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.

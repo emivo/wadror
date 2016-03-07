@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_froze]
+  before_action :ensure_that_user_is_current_user, only: [:edit, :update, :destroy]
   before_action :ensure_that_user_is_admin, only: [:toggle_froze]
 
   # GET /users
@@ -20,6 +21,9 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if @user.password_digest.nil?
+      redirect_to @user, notice: 'You cannot set password for Github account'
+    end
   end
 
   # POST
@@ -55,13 +59,13 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if current_user != @user
-        @user.errors.set(:user, ["is not signin"])
+        redirect_to :back, notice: @user.username + "is not signin"
       end
       if user_params[:username].nil? && current_user == @user && @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render :edit }
+        format.html { render :edit, notice: 'Something went wrong' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -87,5 +91,9 @@ class UsersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     params.require(:user).permit(:username, :password, :password_confirmation)
+  end
+
+  def ensure_that_user_is_current_user
+    redirect_to @user, notice: 'only user it self can do that' if current_user != @user
   end
 end

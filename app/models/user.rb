@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
             }
   validates :username, uniqueness: true,
             length: {minimum: 3,
-                     maximum: 15}
+                     maximum: 39}
 
 
   has_many :ratings, dependent: :destroy
@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
   has_many :beer_clubs, through: :memberships
 
   def self.top(n)
-    User.all.sort_by { |u| -(u.ratings.count||0) }.take(n)
+    # Parempi tehdä vain kaksi sql-kysely
+    User.find(Rating.all.select(:id).order('count_all DESC').group(:user_id).limit(n).count('*').keys)
   end
 
   def favorite_beer
