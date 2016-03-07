@@ -17,7 +17,7 @@
     <% unless membership.confirmed %>
         <li>
           <%= link_to membership.user.username, membership.user %>
-          <% if @existing_membership.confirmed %>
+          <% if @existing_membership && @existing_membership.confirmed %>
               <%= link_to('Confirm', confirm_membership_path(membership.id), method: :post, class: "btn btn-primary") %>
           <% end %>
         </li>
